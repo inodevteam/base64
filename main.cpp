@@ -6,8 +6,8 @@ using namespace std;
 
 namespace crypto{
 
-    static const char END_OF_STRING = '\0';
-    static const string BASE64_ALPHABET = "AZaz09";
+    static const char END_OF_STRING='\0';
+    static const string BASE64_ALPHABET="AZaz09";
 
     class Base64{
       private:
@@ -28,17 +28,17 @@ namespace crypto{
          uint8_t _tmp;
          size_t _mode;
          vector<uint8_t> _out;
-         Base64() : _mode(0){}
+         Base64():_mode(0){}
       public:
          static Base64 create(){
             init();
             return Base64();
          }
-         static const bool available(const Base64&b64) {
-            return b64._out.size()>0 ? true : b64._mode!=4;
+         static const bool available(const Base64&b64){
+            return b64._out.size()>0?true:b64._mode!=4;
          }
          static const bool write(Base64&b64, const uint8_t&c){
-            bool next = true;
+            bool next=true;
             switch(b64._mode){
                case 0:
                   b64._out.push_back(_chars[(c>>2)&0x3f]);
@@ -58,39 +58,39 @@ namespace crypto{
                   b64._mode=0;
                   break;
             }
-            b64._tmp =c;
+            b64._tmp=c;
             return next;
          }
          static const uint8_t read(Base64&b64){
-            uint8_t out = '=';
+            uint8_t out='=';
             if(b64._out.size()>0){
-               out = b64._out[0];
+               out=b64._out[0];
                b64._out.erase(b64._out.begin());
                return out;
             }
             switch(b64._mode){
                case 0:
-                     b64._tmp = END_OF_STRING;
+                     b64._tmp=END_OF_STRING;
                      b64._mode=4;
                      return b64._tmp;
                case 1:
                   if(b64._tmp!=END_OF_STRING){
-                     out = _chars[(b64._tmp<<4)&0x3f];
-                     b64._tmp = END_OF_STRING;
+                     out=_chars[(b64._tmp<<4)&0x3f];
+                     b64._tmp=END_OF_STRING;
                   }
                   b64._mode++;
                   break;
                case 2:
                   if(b64._tmp!=END_OF_STRING){
-                     out = _chars[(b64._tmp<<2)&0x3f];
-                     b64._tmp = END_OF_STRING;
+                     out=_chars[(b64._tmp<<2)&0x3f];
+                     b64._tmp=END_OF_STRING;
                   }
                   b64._mode++;
                   break;
                case 3:
                   if(b64._tmp!=END_OF_STRING){
-                     out = _chars[(b64._tmp)&0x3f];
-                     b64._tmp = END_OF_STRING;
+                     out=_chars[(b64._tmp)&0x3f];
+                     b64._tmp=END_OF_STRING;
                   }
                   b64._mode=0;
                   break;
@@ -104,8 +104,8 @@ namespace crypto{
 using namespace crypto;
 
 int main() {
-   Base64 b64e = Base64::create();
-   string s = "Hello, world!";
+   Base64 b64e=Base64::create();
+   string s="Hello, world!";
    cout << "source: " << s << endl;
    size_t x=0;
    uint8_t r;
@@ -116,7 +116,7 @@ int main() {
             x++;
       }
       if(Base64::available(b64e)){
-         r = Base64::read(b64e);
+         r=Base64::read(b64e);
          if(r==END_OF_STRING) break;
          cout << r;
       }
