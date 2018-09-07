@@ -11,8 +11,8 @@ namespace crypto{
    static const string BASE64_ALPHABET="AZaz09++//";
 
    enum base64_method_t{
-   BASE64_ENCODE,
-   BASE64_DECODE
+      BASE64_ENCODE,
+      BASE64_DECODE
    };
 
    class Base64{
