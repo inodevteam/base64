@@ -1,4 +1,5 @@
-# Base64 Encoder via IRQ
+# Base64 Coder via IRQ
+Encoding data into Base64 text and reverse decoding into data
 ```
 ENCODE_ALPHABET[<ID>]{ A..Z a..z 0..9 + / } => OUTPUT
                  |_____________________          |___________________________
