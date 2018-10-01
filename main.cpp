@@ -60,12 +60,12 @@ namespace crypto{
                      b64._mode++;
                      break;
                   case 1:
-                     b64._out.push_back(_ev[((b64._tmp<<4)+((c>>4)&0xf))&0x3f]);
+                     b64._out.push_back(_ev[((b64._tmp<<4)|((c>>4)&0xf))&0x3f]);
                      b64._mode++;
                      break;
                   case 2:
                      next=false;
-                     b64._out.push_back(_ev[((b64._tmp<<2)+((c>>6)&0x3))&0x3f]);
+                     b64._out.push_back(_ev[((b64._tmp<<2)|((c>>6)&0x3))&0x3f]);
                      b64._mode++;
                      break;
                   case 3:
