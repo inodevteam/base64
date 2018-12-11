@@ -11,7 +11,7 @@ void crypt (base64_ctx*ctx, const uint8_t method, const uint8_t*s,uint8_t*out) {
     if (base64_available(ctx)) {
       r=base64_read(ctx);
       out[r_cnt]=r;
-      if(r=='\0') break;
+      if (r=='\0') break;
       r_cnt++;
     }
   }
